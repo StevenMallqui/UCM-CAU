@@ -1,0 +1,40 @@
+.divider:after,
+.divider:before {
+content: "";
+flex: 1;
+height: 1px;
+background: #eee;
+}
+.h-custom {
+height: calc(100% - 73px);
+}
+@media (max-width: 450px) {
+.h-custom {
+height: 100%;
+}
+}
+
+.tec{
+    display: none;
+}
+
+.numtec{
+    display: none;
+}
+
+.servicios{
+    color: #fff;
+    text-decoration: none;
+    min-width: 80px;
+    text-align: center;
+    border-right: 1px solid #e55c69;
+    padding: 14px 18px;
+}
+
+.log-items{
+    margin-right: 10px;
+}
+
+#user{
+    padding-left: 5px;
+}

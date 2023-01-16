@@ -1,0 +1,13 @@
+<div class="row">
+    <div class="navbar navbar-expand-lg d-flex justify-content-between align-items-center bg-danger">
+        <div class="ml-3">
+            <a href="/avisos/misAvisos" class="d-inline-block servicios">Mis Avisos</a>
+            <a href="/avisos/miHistorico" class="d-inline-block servicios">Histórico de Avisos</a>
+        </div>
+        
+        <form action = "/avisos/avisosPorObservacion" method="POST" class="d-flex">
+            <input type="text" name="byText" class="form-control" placeholder="Observacion" aria-label="Example text with button addon" aria-describedby="button-addon1">
+            <button class="btn btn-outline-success" type="submit" id="button-addon1">Busqueda</button>
+        </form>
+    </div>
+</div>

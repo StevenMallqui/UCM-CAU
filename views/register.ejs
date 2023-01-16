@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset='utf-8'>
+    <link rel="stylesheet" href="/css/loginStyle.css">
+    <link rel="icon" href="logo.png" type="image/png">        
+          <!-- CSS only -->
+     <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+        //- - - - - - - - - - - TÉCNICO SWITCH  - - - - - - - - - - -
+        $(document).ready(function(){
+            $("#perfil").change(function(){
+                var optionValue = $("#perfil option:selected").attr("value");
+                if(optionValue === "Personal de Administración y Servicios (PAS)"){
+                    $(".tec").show();
+                }
+                else{
+                    $(".tec").hide();
+                }
+            });
+        });
+
+        //- - - - - - - - - - - Nº EMPLEADO  - - - - - - - - - - -
+        $(document).ready(function(){
+            $("#tecnico").change(function(){
+                if( $('#tecnico').is(":checked")){
+                    $(".numtec").show();
+                    $("#numeroE").attr("type", "text");
+                }
+                else{
+                    $(".numtec").hide();
+                    $("#numeroE").attr("type", "hidden");
+                }
+            });
+        });
+    </script>
+    <title>UCM-CAU</title>
+</head>
+<body class="container-fluid">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-lg-5">
+            <img src="/img/UCM-CAU.png"
+            class="img-fluid" alt="Sample image">
+        </div>
+        <div class="col-lg-5">
+            <% if (msgRegistro) {%>
+                <div class="alert alert-danger" role="alert">
+                    ¡El usuario ya existe!
+                </div>
+            <% } %>  
+            <form method="POST" action="/usuarios/registro"  enctype="multipart/form-data">
+                <div class="row mb-3">
+                    <!-- NOMBRE -->
+                    <div class="col-lg-4">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre"required>
+                    </div>
+                    <!-- APELLIDO 1 -->
+                    <div class="col-lg-4">
+                        <label for="apellido1" class="form-label">Apellido 1</label>
+                        <input type="text" class="form-control" id="apellido1" name="apellido1" placeholder="Apellido 1" required>
+                    </div>
+                    <!-- APELLIDO 2 -->
+                    <div class="col-lg-4">
+                        <label for="apellido2" class="form-label">Apellido 2</label>
+                        <input type="text" class="form-control" id="apellido2" name="apellido2" placeholder="Apellido 2" required>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <!-- CORREO -->
+                    <div class="col-lg-6">
+                        <label for="correo" class="form-label">Correo</label>
+                        <input type="email" class="form-control" id="correo" name="correo" placeholder="name@ucm.es" required>
+                        <% if (errores.correo) { %>
+                            <span class="text-danger"> <%= errores.correo.msg %> </span> 
+                        <% } %>
+                    </div>        
+
+                    <!-- NOMBRE PARA MOSTRAR -->
+                    <div class="col-lg-6">
+                        <label for="nombreMostrar">Nombre para mostrar</label>
+                        <input type="text" class="form-control" id="nombreMostrar" name="nombreMostrar" placeholder="Nombre para mostrar" required>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <!-- CONTRASEÑA -->
+                    <div class="col-lg-6">
+                        <label for="floatingPassword">Contraseña</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                        <% if (errores.password) { %>
+                            <span class="text-danger"> <%= errores.password.msg %> </span> 
+                        <% } %>
+                    </div>
+
+                    <!-- PERFIL UNIVERSITARIO -->
+                    <div class="col-lg-6">
+                        <label for="inputGender">Perfil Universitario</label> 
+                        <select class="form-select col-lg-4" id="perfil" name="perfil" aria-label="Default select example">
+                            <option value="Alumno">Alumno</option>
+                            <option value="Personal de Administración y Servicios (PAS)">Personal de Administración y Servicios (PAS)</option>
+                            <option value="Personal Docente e Investigador (PDI)">Personal Docente e Investigador (PDI)</option>
+                            <option value="Antiguo Alumno">Antiguo Alumno</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <!-- CONFIRMAR CONTRASEÑA -->
+                    <div class="col-lg-6">
+                        <label for="floatingPassword">Confirmar contraseña</label>
+                        <input type="password" class="form-control" id="passwordC" name="passwordC" placeholder="Password">
+                        <% if (errores.passwordC) { %>
+                            <span class="text-danger"> <%= errores.passwordC.msg %> </span> 
+                        <% } %>
+                    </div>
+
+                    <!-- TÉCNICO SWITCH AND Nº EMPLEADO -->
+                    <div class="col-lg-6">
+                        <div class="form-check form-switch">
+                            <label class="form-check-label tec" for="tecnico">Técnico</label>
+                            <input class="form-check-input tec" name="tecnico" type="checkbox" id="tecnico">
+                        </div>
+                        <label class="form-check-label numtec" for="numeroE">Nº Empleado</label>
+                        <input type="hidden" class="form-control" name="numeroE" id="numeroE" placeholder="1234-eng">
+                        <% if (errores.numeroE) { %>
+                            <span class="text-danger"> <%= errores.numeroE.msg %> </span> 
+                        <% } %>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <!-- IMAGEN -->
+                    <div class="mb-3">
+                        <label for="imagen" class="form-label">Imagen de perfil</label>
+                        <input class="form-control" type="file" name="imagen" id="imagen">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <!-- INICIAR SESIÓN AND CREAR NUEVA CONTRASEÑA BUTTONS -->
+                    <div class="d-flex justify-content-between">
+                        <a href="/login" class="btn btn-outline-primary btn-lg">Iniciar sesión</a>
+                        <button type="submit" class="btn btn-outline-success btn-lg">Crear nueva cuenta</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- FOOTER COPYRIGHT -->
+    <div class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
+        <div class="text-white mb-3 mb-md-0">
+          Copyright © 2022. All rights reserved.
+        </div>
+    </div>
+</body>
+</html>
