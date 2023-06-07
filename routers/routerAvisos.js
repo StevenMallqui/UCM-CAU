@@ -26,7 +26,7 @@ routerAvisos.get("/misAvisos",
 
 routerAvisos.get("/miHistorico",
                 cU.usuarioLogged,
-                cA.getAvisosByResuelto);
+                cA.miHistorico);
 
 routerAvisos.post("/eliminarAviso/:id",
                 cU.usuarioLogged,

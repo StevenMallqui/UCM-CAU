@@ -90,11 +90,10 @@ class controllerA{
         }
     }
 
+    miHistorico(req, res){
 
-    getAvisosByResuelto(req, res){
-
-        if(req.session.tipoUsuario === "Usuario"){
-            avisos.readAllAvisosResueltos(req.session.idU, cb_avisosByResuelto);
+        if(req.session.rol === "Usuario"){
+            avisos.readAllPostedSolvedAvisosByUsuario(req.session.userId, cb_avisosByResuelto);
             function cb_avisosByResuelto(err, rows){
                 if(err){
                     res.status(500);
@@ -106,7 +105,7 @@ class controllerA{
                             consult : "HISTÓRICO",
                             nameUser: req.session.userName,
                             imageUser: req.session.mailID, 
-                            tipoUsuario: req.session.tipoUsuario,
+                            rol: req.session.rol,
                             perfil: req.session.perfil,
                             listaAvisos: rows,
                         });
@@ -114,7 +113,7 @@ class controllerA{
                 }
             }
         }else{
-            avisos.readAllAvisosAsignadosTerminados(req.session.idU, cb_avisosByResuelto);
+            avisos.readAllAssignedSolvedAvisosByTecnico(req.session.userId, cb_avisosByResuelto);
             function cb_avisosByResuelto(err, rows){
                 if(err){
                     res.status(500);
@@ -126,7 +125,7 @@ class controllerA{
                             consult : "HISTORICO",
                             nameUser: req.session.userName,
                             imageUser: req.session.mailID, 
-                            tipoUsuario: req.session.tipoUsuario,
+                            rol: req.session.rol,
                             perfil: req.session.perfil,
                             listaAvisos: rows,
                         });
